@@ -1,0 +1,116 @@
+/* 全局剧情对白与四幕共用扫描；独立于章节逻辑与原素材。 */
+#stage .scene-heading { left:4cqw; right:auto; top:2cqw; }
+/* 放大的剧情背景仍裁剪在舞台内，避免焦点推进带动隐藏滚动。 */
+#stage:has(.story-dialogue) { overflow:clip; }
+#stage .story-dialogue {
+  /* 16:9 舞台：宽90%，最小高度19%，底部5%。
+     view 已留3.4cqw底部空间，此处仅补偿定位，不使用负边距。 */
+  position:absolute; left:5cqw; right:5cqw; bottom:calc(2.8125cqw - 3.4cqw);
+  width:auto; max-width:none; box-sizing:border-box;
+  display:grid; grid-template-columns:minmax(0,1fr) 12cqw; grid-template-rows:auto auto;
+  column-gap:2.083333cqw; row-gap:.833333cqw; align-content:center;
+  height:auto; min-height:10.6875cqw; padding:1.25cqw 1.875cqw 1.25cqw 2.083333cqw; border-radius:2px;
+  background:linear-gradient(110deg,#f7efdef5,#eee3d1f5); border:1px solid #b8a17d;
+  box-shadow:inset 0 0 0 4px #f6eedb70,inset 0 0 0 5px #b9a37b40,0 .5cqw 2cqw #10150e25;
+  color:var(--ink); z-index:5; animation:reveal .45s both;
+}
+#stage .story-dialogue::before { content:""; position:absolute; width:1.4cqw; height:1.4cqw; left:.4cqw; top:.4cqw; border-left:1px solid #a58a5b; border-top:1px solid #a58a5b; pointer-events:none; }
+#stage .story-dialogue .speaker { font-size:1cqw; line-height:1.15; padding:.16cqw .65cqw; letter-spacing:.12em; border:1px solid currentColor; background:#faf3e6a0; grid-column:1; grid-row:1; justify-self:start; align-self:start; margin:0; }
+#stage .story-dialogue p { font-size:1.5cqw; font-weight:500; line-height:1.5; margin:0; min-height:0; min-width:0; width:100%; max-width:none; padding:0; white-space:normal; word-break:normal; overflow-wrap:break-word; line-break:strict; grid-column:1; grid-row:2; align-self:start; color:var(--ink); }
+#stage .story-dialogue .continue { position:relative; right:auto; bottom:auto; grid-column:2; grid-row:1 / 3; align-self:center; justify-self:center; width:100%; min-width:0; max-width:none; float:none; margin:0; font-size:1.2cqw; padding:.65cqw .9cqw; gap:1cqw; }
+#stage .story-dialogue::after { content:none; }
+@container (max-width:1000px) {
+  /* 小窗口保留原字号下限；文案需要更多行时由内容撑高，不裁切。 */
+  #stage .story-dialogue { grid-template-columns:minmax(0,1fr) max(12cqw,128px); column-gap:max(2.083333cqw,16px); row-gap:max(.833333cqw,10px); padding:max(1.25cqw,12px) max(1.875cqw,14px) max(1.25cqw,12px) max(2.083333cqw,16px); }
+  #stage .story-dialogue .speaker { font-size:max(1cqw,10px); padding:2px 6px; }
+  #stage .story-dialogue p { font-size:max(1.5cqw,16px); }
+  #stage .story-dialogue .continue { min-height:36px; font-size:max(1.2cqw,12px); padding:6px 8px; }
+}
+/* 卡片剧情仍展示原卡；对白占用底部统一位置，放大操作移至左侧。 */
+#stage .card-workspace:has(.story-dialogue) { align-items:start; padding-top:.5cqw; }
+#stage .card-workspace:has(.story-dialogue) .treasure-card-host { top:0; }
+#stage .card-workspace:has(.story-dialogue) .treasure-card { --u:.72cqw; }
+#stage .card-workspace:has(.story-dialogue) .card-notes { padding-top:2cqw; }
+#stage .view:has(.card-workspace .story-dialogue) .card-under-controls { left:4cqw; right:auto; bottom:15cqw; }
+#stage .view:has(.story-dialogue) .chapter04-prototype,
+#stage .view:has(.story-dialogue) .teaching-caption { left:4cqw; top:26cqw; bottom:auto; max-width:26cqw; font-size:.85cqw; line-height:1.6; }
+
+#stage[data-mode="scan"] .shade { background:linear-gradient(90deg,#0c1915d9,transparent 43%,transparent 62%,#0c19158a); }
+#stage .scan-title { left:4cqw; top:.7cqw; width:31cqw; text-align:left; }
+.scan-title .scan-english { display:block; font-size:.78cqw; letter-spacing:.15em; color:#bba988; margin-top:.35cqw; }
+#stage .scan-title h1 { font-size:2.5cqw; margin:.45cqw 0; }
+#stage .scan-title p { font-size:1.1cqw; }
+#stage .questions { inset:11cqw auto auto 4cqw; width:31cqw; display:flex; flex-direction:column; gap:.9cqw; }
+#stage .question { position:relative; overflow:hidden; width:100%; height:5.2cqw; min-height:0; padding:.8cqw 1.1cqw; font-size:1.05cqw; }
+#stage .q-heading { gap:.65cqw; line-height:1.15; }
+#stage .q-code { font-size:1cqw; }
+#stage .q-title { font-size:1.25cqw; line-height:1.3; margin-top:.25cqw; }
+#stage .question.scanning { border-color:#e4c98b; background:#5e5138de; box-shadow:0 0 1.2cqw #dab87335,inset 0 0 .8cqw #d3b17122; }
+#stage .question.scanning::after { content:""; position:absolute; inset:0; background:linear-gradient(100deg,transparent 30%,#e8d39835 50%,transparent 70%); animation:scan-card-sweep .65s ease-out both; pointer-events:none; }
+#stage .question.success { box-shadow:inset 3px 0 #9ab9a1; }
+#stage .question.failure { box-shadow:inset 3px 0 #c98572; }
+#stage .question.success .q-state,#stage .question.failure .q-state { animation:scan-mark .45s ease-out both; }
+#stage #scan-status { top:35.6cqw; left:4cqw; width:31cqw; text-align:left; font-size:calc(.85cqw + 3px); line-height:1.7; font-weight:500; color:#eee3ca; text-shadow:0 1px 3px #08120ddd,0 0 .4cqw #d8bb7220; }
+/* 右侧结论与按钮属于同一容器，长依据展开也不会把操作区拆散。 */
+#stage .scan-outcome { position:absolute; top:11cqw; right:4cqw; width:27cqw; display:flex; flex-direction:column; gap:1.1cqw; }
+#stage .scan-panel { position:relative; left:auto; bottom:auto; width:100%; min-height:23.5cqw; max-height:28cqw; padding:1.5cqw 1.3cqw; overflow:auto; scrollbar-width:thin; }
+#stage .result { align-items:flex-start; gap:.8cqw; }
+#stage .result-mark { font-size:2.4cqw; }
+#stage .result h2 { font-size:1.65cqw; line-height:1.5; margin:.25cqw 0; }
+#stage .result p { font-size:1.1cqw; line-height:1.65; text-wrap:initial; }
+#stage .result small { display:block; font-size:1cqw; line-height:1.65; margin-top:.3cqw; }
+#stage .result.failure h2 { font-size:1.35cqw; line-height:1.4; }
+#stage .result.failure p { font-size:1.05cqw; line-height:1.5; }
+#stage .result.failure small { font-size:.95cqw; line-height:1.5; }
+#stage .evidence h2 { font-size:1.55cqw; }
+#stage .evidence p { font-size:1.05cqw; }
+#stage .evidence small { font-size:.95cqw; }
+#stage .scan-actions { position:static; right:auto; bottom:auto; align-items:center; justify-content:flex-start; }
+/* 四幕结论共用主标题、说明与记录分区。 */
+#stage .result.result--focus { display:grid; grid-template-columns:3.6cqw minmax(0,1fr); gap:1.2cqw .9cqw; }
+#stage .result.result--focus .result-mark { margin-top:0; }
+#stage .result.result--focus .result-heading { font-size:2cqw; font-weight:650; line-height:1.4; margin:0 0 .85cqw; }
+#stage .result.result--focus .result-explanation { font-size:1.25cqw; line-height:1.6; font-weight:500; margin:0 0 .8cqw; color:#f1e4d2; }
+#stage .result.result--focus .result-copy > p:last-child { text-wrap:balance; }
+#stage .result.result--focus .result-summary { grid-column:1 / -1; border-top:1px solid #c9857255; padding-top:1.1cqw; }
+#stage .result.result--focus .result-summary p { font-size:1.05cqw; font-weight:500; line-height:1.7; margin:0; color:#f0d5c7; }
+#stage .result.result--focus .result-summary .result-opportunity { font-size:1.15cqw; margin-top:.8cqw; color:#e9d399; }
+.scan-aura { position:absolute; inset:-6.5cqw 0 -3.4cqw; pointer-events:none; }
+.aura-beam { position:absolute; left:40cqw; top:12cqw; width:20cqw; height:41cqw; background:radial-gradient(ellipse,#f1cb7400 35%,#e4b96414 65%,transparent 76%); animation:aura-breathe 6s ease-in-out infinite; }
+.aura-ring { position:absolute; left:36cqw; bottom:1.3cqw; width:28cqw; height:5cqw; border:1px solid #efd59a80; border-radius:50%; box-shadow:0 0 1.2cqw #e4b96426; animation:aura-floor 4.8s ease-in-out infinite; }
+.aura-wave { position:absolute; left:36cqw; top:24cqw; width:28cqw; height:4.3cqw; border:1px solid #efd59a38; border-left-color:transparent; border-right-color:transparent; border-radius:50%; animation:aura-flow 8s ease-in-out infinite; }
+.scan-aura::after { content:""; position:absolute; left:35cqw; top:12cqw; width:30cqw; height:41cqw; background:radial-gradient(ellipse,#f4d59500 40%,#ecc36b1f 65%,transparent 75%); opacity:0; }
+.scan-aura[data-pulse="0"]::after,.scan-aura[data-pulse="2"]::after { animation:aura-sync-a 1.2s ease-out; }
+.scan-aura[data-pulse="1"]::after,.scan-aura[data-pulse="3"]::after { animation:aura-sync-b 1.2s ease-out; }
+@keyframes scan-card-sweep { from {transform:translateX(-100%)} to {transform:translateX(100%)} }
+@keyframes scan-mark { from {opacity:0;transform:scale(.75)} to {opacity:1;transform:scale(1)} }
+@keyframes aura-breathe { 0%,100% {opacity:.4} 50% {opacity:.9} }
+@keyframes aura-floor { 0%,100% {opacity:.3;transform:scale(.97)} 50% {opacity:.65;transform:scale(1.025)} }
+@keyframes aura-flow { 0%,100% {opacity:.3;transform:translateY(-.4cqw) rotate(-2deg)} 50% {opacity:.7;transform:translateY(.4cqw) rotate(2deg)} }
+@keyframes aura-sync-a { 0%,100% {opacity:0} 35% {opacity:.7} }
+@keyframes aura-sync-b { 0%,100% {opacity:0} 35% {opacity:.7} }
+@media (prefers-reduced-motion:reduce) {
+  #stage .story-dialogue,.scan-aura i,.scan-aura::after,#stage .question.scanning::after,#stage .question .q-state { animation:none; }
+  .scan-aura i { opacity:.35; }
+}
+
+/* 记录总结：左卡片、右状态说明与按钮。 */
+#stage .record-summary { position:absolute; inset:0 9cqw; display:grid; grid-template-columns:36cqw 36cqw; gap:10cqw; align-items:center; }
+#stage .record-card { display:flex; flex-direction:column; align-items:center; gap:1cqw; }
+#stage .record-card .treasure-card-host { top:0; }
+#stage .record-card .treasure-card { --u:.9cqw; }
+#stage .record-explanation h1 { font-size:3.1cqw; margin:1cqw 0 1.5cqw; }
+#stage .record-explanation h2 { font-size:2cqw; margin-bottom:1cqw; }
+#stage .record-explanation p { font-size:1.4cqw; line-height:1.8; margin-bottom:2cqw; }
+#stage .record-explanation .continue { float:none; }
+
+/* 第二幕疑惑场景：缓慢聚焦小美和手中的卡片，两句对白间镜头连续。 */
+#stage[data-background="doubtCard02"] .backdrop { transform-origin:35% 47%; animation:card-doubt-push 8s ease-out both; }
+@keyframes card-doubt-push { from { transform:scale(1); } to { transform:scale(1.03); } }
+@media (prefers-reduced-motion:reduce) {
+  #stage[data-background="doubtCard02"] .backdrop { animation:none; transform:scale(1); }
+}
+
+/* 本轮局部补丁：仅原版寻宝卡观察页与第三幕扫描结论。 */
+#stage .card-view:not(.iteration-view) .treasure-card-host:has(.card-zoom-button) { display:flex; flex-direction:column; align-items:center; gap:.7cqw; }
+#stage .scan-outcome[data-scan-number="03"] .result--focus .result-copy > p:last-child { font-size:1.35cqw; line-height:1.65; font-weight:500; }

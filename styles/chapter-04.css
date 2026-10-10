@@ -1,0 +1,130 @@
+/* 本幕的界面覆盖不修改原图片；纸签遮住前两图已有章纹，完成图仅在盖章后使用。 */
+[data-chapter="4"] .scene-heading { left:auto; right:4cqw; }
+[data-chapter="4"] .continue:disabled { opacity:.65; }
+.chapter04-camera-skip { position:absolute; top:1cqw; left:4cqw; padding:.5cqw .8cqw; background:#20251bce; }
+.chapter04-prototype { position:absolute; left:4cqw; bottom:.3cqw; font-size:.85cqw; line-height:1.5; color:#dfccb0; padding:.3cqw .6cqw; background:#172019de; }
+[data-camera04] .backdrop { transform-origin:48% 46%; transition:transform var(--camera04-time,350ms) ease-in-out,filter .6s; }
+[data-camera04-phase="environment"] .backdrop { transform:scale(1); }
+[data-camera04="submit"][data-camera04-phase="pushing"] .backdrop { animation:submit04-push var(--camera04-time) ease-in-out both; }
+[data-camera04="submit"][data-camera04-phase="stable"] .backdrop { transform:scale(1.035); }
+[data-camera04="verification"][data-camera04-phase="pushing"] .backdrop { animation:verify04-push var(--camera04-time) ease-in-out both; }
+[data-camera04="verification"][data-camera04-phase="stable"] .backdrop { transform:scale(1.02); }
+[data-camera04="completion"][data-camera04-phase="pushing"] .backdrop { animation:completion04-push var(--camera04-time) ease-in-out both; }
+[data-camera04="completion"][data-camera04-phase="stable"] .backdrop { transform:scale(1.03); }
+@keyframes submit04-push { from {transform:scale(1)} to {transform:scale(1.035)} }
+@keyframes verify04-push { from {transform:scale(1)} to {transform:scale(1.02)} }
+@keyframes completion04-push { from {transform:scale(1)} to {transform:scale(1.03)} }
+.photo-card-sign { position:absolute; padding:.25cqw .3cqw; width:2.5cqw; height:3.3cqw; font-size:.75cqw; line-height:1.2; display:grid; place-items:center; color:#77573e; border:1px solid #a38356; background:#d9c4a0; writing-mode:vertical-rl; pointer-events:none; box-shadow:0 1px 2px #5a3e3325; }
+.submit-card-sign { left:45.2cqw; top:17.95cqw; transform:rotate(-13deg); }
+.verification-card-sign { left:41.8cqw; top:15cqw; transform:rotate(-13deg); }
+[data-camera04-phase="pushing"] .photo-card-sign,[data-camera04-phase="stable"] .photo-card-sign { transition:translate var(--camera04-time) ease-in-out,scale var(--camera04-time) ease-in-out; }
+[data-camera04="submit"][data-camera04-phase="pushing"] .photo-card-sign,[data-camera04="submit"][data-camera04-phase="stable"] .photo-card-sign { translate:-.05cqw .04cqw; scale:1.035; }
+[data-camera04="verification"][data-camera04-phase="pushing"] .photo-card-sign,[data-camera04="verification"][data-camera04-phase="stable"] .photo-card-sign { translate:-.08cqw -.05cqw; scale:1.02; }
+[data-chapter="4"]:has(.verification-card-view,.stamp04-view) .backdrop { filter:brightness(.3) saturate(.7); }
+[data-chapter="4"]:has(.verification-card-view,.stamp04-view) .shade { background:#17231be0; }
+[data-chapter="4"] .card-notes h1 { font-size:2.5cqw; line-height:1.6; margin:1cqw 0; }
+[data-chapter="4"] .card-context h2 { font-size:2cqw; line-height:1.6; margin:1cqw 0; }
+[data-chapter="4"] .card-context p { font-size:1.35cqw; line-height:1.85; color:#eadfc5; margin:1cqw 0 1.6cqw; }
+[data-chapter="4"] .recognition-hint { display:none; }
+[data-chapter="4"] .paste-slot span { display:grid; place-items:center; font:1cqw Georgia,serif; color:#873e31; border-style:solid; }
+.verification-state { display:block; font-size:.8cqw; line-height:1.4; margin-top:.3cqw; color:#83694c; }
+[data-chapter="4"] .verification-passed { background:#5e897a14; border-color:#6c8b7775; transition:background .35s,border-color .35s; }
+.verification-passed .verification-state { color:#315e4c; }
+.verification-counter { display:block; font:4cqw Georgia,serif; color:#bad1bb; margin:1cqw 0; }
+[data-chapter="4"] .card-under-controls { bottom:.6cqw; }
+.stamp04-view .card-footnote { text-align:left; max-width:calc(20 * var(--u)); font-size:calc(.78 * var(--u)); }
+[data-chapter="4"]:has(.verification-card-view,.stamp04-view) .chapter04-prototype { max-width:29cqw; font-size:.85cqw; }
+.stamp-tool { position:absolute; bottom:1.2cqw; right:1.4cqw; width:6cqw; height:6cqw; display:grid; place-items:center; color:#f4dfc4; background:#78382d; border:3px double #ceac7e; box-shadow:0 .8cqw 1.8cqw #0f150d60; z-index:3; font:2cqw/1.2 "Songti SC",serif; animation:stamp04-down 1.9s ease-in-out both; }
+.stamp-tool::before { content:""; position:absolute; bottom:100%; left:35%; width:30%; height:2.6cqw; border-radius:40% 40% 2px 2px; background:linear-gradient(90deg,#693226,#9c4d3c,#693226); }
+@keyframes stamp04-down { 0% {transform:translateY(-24cqw) rotate(-8deg);opacity:0} 18% {opacity:1} 43% {transform:translateY(0) rotate(-8deg);opacity:1} 53% {transform:translateY(.2cqw) scale(.96) rotate(-8deg)} 65% {transform:translateY(-1.5cqw) rotate(-8deg);opacity:1} 100% {transform:translateY(-23cqw) rotate(-8deg);opacity:0} }
+.completion-seal { position:absolute; bottom:1.2em; right:1.4em; width:6em; height:6em; display:grid; grid-template-columns:1fr 1fr; align-content:center; padding:.3em; border:3px double #a34535; border-radius:2px; color:#a34535; font-family:"Songti SC","STSong",serif; transform:rotate(-8deg); opacity:.9; background:#f1e6cebd; font-size:var(--u,1cqw); animation:seal04-ink .3s ease both; }
+.completion-seal span { font-size:2em; text-align:center; line-height:1.05; }
+.completion-seal small { grid-column:1/-1; text-align:center; font-size:.7em; letter-spacing:.18em; border-top:1px solid #a3453570; margin-top:.2em; padding-top:.1em; }
+@keyframes seal04-ink { from {opacity:.2;filter:blur(.5px)} to {opacity:.9;filter:none} }
+[data-stamp-phase="pressed"] .treasure-card { animation:paper04-press .35s ease both; }
+@keyframes paper04-press { 40% {transform:scaleY(.992)} }
+[data-chapter="4"]:has(.summary04-view) .shade { background:#1b261be8; }
+.walkthrough-summary { position:absolute; inset:1cqw 4cqw .8cqw; padding:1.3cqw 2.1cqw; color:#382e22; background:radial-gradient(ellipse at 15% 15%,#b9915b18,transparent 60%),#f0e6d2; border:1px solid #9e8359; box-shadow:inset 0 0 0 5px #f6eddc,inset 0 0 0 6px #a78d6540; display:flex; flex-direction:column; gap:.8cqw; }
+.walkthrough-summary>header { text-align:center; }
+.walkthrough-summary .eyebrow { color:#816240; }
+.walkthrough-summary h1 { font-size:2.4cqw; line-height:1.25; margin:.25cqw 0; }
+.walkthrough-summary header p { font-size:1.1cqw; line-height:1.5; color:#705b44; }
+.summary-metrics { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid #9d815e50; border-bottom:1px solid #9d815e50; padding:.4cqw 0; }
+.summary-metrics>div { display:flex; justify-content:center; align-items:center; gap:1cqw; border-right:1px solid #9d815e40; }
+.summary-metrics>div:last-child { border:0; }
+.summary-metrics strong { font:2.8cqw Georgia,serif; color:#8b4234; }
+.summary-metrics span { font-size:1.15cqw; }
+.summary-path { display:grid; grid-template-columns:repeat(4,1fr); gap:1.2cqw; flex:1; min-height:18.8cqw; }
+.summary-node { padding:1cqw 1.1cqw; border-top:2px solid #a35342; background:#b1845920; }
+.summary-node.success { border-color:#527966; background:#65857016; }
+.summary-number { font:1.9cqw Georgia,serif; color:#92744f; }
+.summary-node h2 { font-size:1.7cqw; line-height:1.5; margin:.2cqw 0 .5cqw; }
+.summary-node strong { display:block; font-size:1.2cqw; color:#8a4638; font-weight:500; margin-bottom:.7cqw; }
+.summary-node.success strong { color:#315d48; }
+.summary-node p { font-size:1.1cqw; line-height:1.65; margin:.35cqw 0; }
+.summary-method { text-align:center; border-top:1px solid #9d815e50; padding-top:.6cqw; }
+.summary-method h2 { font-size:1.45cqw; line-height:1.4; color:#794032; }
+.summary-method p { font-size:1cqw; line-height:1.55; margin-top:.25cqw; }
+.walkthrough-summary>footer { display:flex; justify-content:space-between; gap:2cqw; align-items:center; }
+.walkthrough-summary>footer p { max-width:65cqw; font-size:.95cqw; line-height:1.7; color:#745f49; }
+.walkthrough-summary>footer .continue { font-size:1.2cqw; padding:.7cqw 1.6cqw; }
+@media (prefers-reduced-motion:reduce) { [data-camera04] .backdrop { transform:none; } [data-camera04] .photo-card-sign { translate:none;scale:1; } }
+.report-actions { display:flex; align-items:center; gap:1cqw; flex-shrink:0; }
+.walkthrough-summary>footer p { max-width:46cqw; }
+[data-chapter="4"]:has(.opportunities04-view) .shade { background:#1b261be8; }
+.opportunities-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5cqw; flex:1; }
+.opportunity-node { padding:1cqw 1.4cqw; background:#b1845918; border-top:2px solid #a35342; }
+.opportunity-node h2 { font-size:1.8cqw; line-height:1.5; margin:.4cqw 0; }
+.opportunity-source { display:block; font-size:1.1cqw; color:#874836; font-weight:500; }
+.opportunity-node ul { padding-left:1.5cqw; margin:.6cqw 0; font-size:1.15cqw; line-height:1.8; }
+.opportunity-node h3 { font-size:1.15cqw; margin-top:.5cqw; }
+.opportunity-node p { font-size:1.15cqw; line-height:1.7; margin:.4cqw 0; }
+.opportunity-node .opportunity-explore { color:#755d43; font-size:1cqw; }
+.opportunities-report .summary-method h2 { font-size:1.3cqw; }
+.opportunities-report .text-button { color:#775536; font-size:1cqw; }
+
+/* V2 核验补丁：左卡右文，任务未通过与认知成功分开。 */
+#stage .verification-workspace { position:absolute; inset:0 9cqw; display:grid; grid-template-columns:36cqw 36cqw; gap:10cqw; align-items:center; }
+#stage .verification-card { display:flex; flex-direction:column; align-items:center; gap:.7cqw; }
+#stage .verification-card .treasure-card-host { top:0; }
+#stage .verification-card .treasure-card { --u:1cqw; }
+#stage .verification-copy h1 { font-size:2.8cqw; line-height:1.5; margin:1cqw 0; }
+#stage .verification-copy h2 { font-size:1.5cqw; line-height:1.6; margin:1cqw 0; }
+#stage .verification-copy p { font-size:1.3cqw; line-height:1.8; margin:1cqw 0 1.7cqw; }
+#stage .verification-copy .continue { float:none; }
+#stage .verification-counter span { font:1.3cqw/1.5 sans-serif; color:var(--paper); }
+#stage .verification-copy .verification-error-title { color:#f0b9a7; font-size:1.8cqw; }
+#stage .verification-copy .verification-task-state { border-left:2px solid #c98572; background:#713e302f; padding:.6cqw .9cqw; color:#f1c5b5; font-size:1.15cqw; }
+#stage .verification-failed { background:#a34f3b18; border-color:#a34f3b90; }
+#stage .verification-failed .verification-state { color:#983e30; }
+#stage .verification-state { font-size:.9cqw; font-weight:500; }
+#stage .verification-checking { background:#c7a05a30; box-shadow:inset 0 0 0 1px #b59157; transition:background .3s; }
+#stage[data-camera04="feedback"] .backdrop { transform-origin:48% 46%; }
+[data-camera04="feedback"][data-camera04-phase="pushing"] .backdrop { animation:feedback04-push var(--camera04-time) ease-in-out both; }
+[data-camera04="feedback"][data-camera04-phase="stable"] .backdrop { transform:scale(1.025); }
+@keyframes feedback04-push { from {transform:scale(1)} to {transform:scale(1.025)} }
+#stage .summary-task-result { color:#873f30; font-weight:500; margin-top:.35cqw; }
+#stage .chapter04-camera-skip { left:auto; right:4cqw; }
+
+@media (prefers-reduced-motion:reduce) { [data-camera04="feedback"] .backdrop { animation:none; transform:none; } }
+
+/* V3.1 报告新增两条设计机会后，保持正文与操作区完整可见。 */
+.summary04-view .walkthrough-summary { gap:.5cqw; }
+.summary04-view .summary-path { min-height:15cqw; }
+.summary04-view .summary-node { padding:.7cqw 1.1cqw; }
+
+/* 最终收束页：复用当前核验反馈背景与 shade，不影响其他第四幕页面。 */
+#stage:has(.final-end-view) .shade { background:rgba(8,18,14,.62); }
+#stage .final-end-view { display:grid; place-items:center; }
+#stage .walkthrough-final {
+  width:min(57.291667cqw,90cqw); max-width:none; padding:0;
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  color:#f3ebdc; text-shadow:0 2px 5px #07120e66;
+}
+#stage .walkthrough-final .eyebrow { font-size:1.25cqw; line-height:1.5; letter-spacing:.2em; color:#d4bd87; }
+#stage .walkthrough-final h1 { font-size:4.166667cqw; line-height:1.3; font-weight:500; letter-spacing:.06em; margin:1.25cqw 0 0; }
+#stage .walkthrough-final p { font-size:1.666667cqw; line-height:1.6; color:#e6ddcb; margin:1.458333cqw 0 0; }
+#stage .walkthrough-final-actions { display:flex; justify-content:center; gap:1.5cqw; margin-top:3.125cqw; }
+#stage .walkthrough-final-actions .continue { margin:0; float:none; text-shadow:none; }
+#stage .walkthrough-final .continue:disabled { opacity:1; }
+#stage:has(.final-end-view) .footer { visibility:hidden; }
