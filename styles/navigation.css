@@ -1,0 +1,14 @@
+/* 返回按钮不占用原对白网格；排列在继续按钮下方。 */
+#stage .story-dialogue .navigation-previous { position:absolute; right:1.875cqw; bottom:.65cqw; width:12cqw; text-align:center; font-size:max(12px,1cqw); line-height:1.5; color:#755536; }
+#stage .navigation-previous { font-size:max(12px,1cqw); padding:.35cqw .6cqw; }
+#stage .navigation-previous--floating { position:absolute; left:4cqw; right:auto; bottom:1cqw; background:#18241ed9; }
+#stage .record-explanation > .navigation-previous,#stage .verification-copy > .navigation-previous { display:block; margin-top:.6cqw; }
+#stage .developer-navigation { position:absolute; z-index:30; right:1cqw; top:6.8cqw; max-width:22cqw; padding:.5cqw .7cqw; border:1px solid #bca57588; background:#14231ef2; color:#eee3ca; font: max(12px,.85cqw)/1.6 sans-serif; }
+#stage .developer-navigation summary { cursor:pointer; color:#d7c18d; }
+#stage .developer-navigation label,#stage .developer-navigation small { display:block; }
+#stage .developer-navigation select { display:block; width:100%; max-width:21cqw; margin:.4cqw 0; padding:.3cqw; background:#eee3ca; color:#342a1f; }
+#stage .developer-navigation small { max-width:21cqw; color:#d6cbb7; }
+#stage .debug-state-banner { position:absolute; z-index:25; top:2cqw; left:70cqw; padding:.3cqw .7cqw; background:#593a25ed; border:1px solid #d3ad65; color:#ffe0a5; font-size:max(12px,.85cqw); pointer-events:none; }
+
+#stage .navigation-previous--scan { left:auto; right:4cqw; bottom:3cqw; }
+#stage .navigation-restored .story-dialogue,#stage .navigation-restored .treasure-card-host,#stage .navigation-restored .reveal { animation:none; }

@@ -1,0 +1,2 @@
+/* 仅入殿寻宝扫描结论：放大断点记录，保留原版结构与动画。 */
+#stage .scan-outcome[data-scan-number="03"] .result.result--focus .result-summary p { font-size:1.7cqw; line-height:1.6; }

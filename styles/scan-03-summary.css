@@ -1,0 +1,5 @@
+/* 核验扫描结论按语义换行，保持“用户知道任务成功或失败”连续。 */
+#stage .scan-outcome[data-scan-number="04"] .result-copy > p:last-child { white-space:pre; text-wrap:nowrap; }
+
+#stage .scan-outcome[data-scan-number="04"] .result.result--focus .result-copy > p:last-child,
+#stage .scan-outcome[data-scan-number="04"] .result.result--focus .result-summary p { font-size:1.45cqw; line-height:1.7; }

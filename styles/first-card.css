@@ -1,0 +1,24 @@
+/* 第一幕看卡复用原版卡片与对白；不改扫描样式。 */
+#stage:has(.first-card-view) .backdrop { filter:brightness(.35) saturate(.65); }
+#stage:has(.first-card-view) .shade { background:linear-gradient(90deg,#18201ccc,#1c241cb0); }
+
+/* 原图均为16:9，cover仅随原镜头做轻微推进。指南放在右侧，不遮挡左侧小美。 */
+#stage:has(.self-service-view) .backdrop { background-position:50% 50%; }
+#stage .activity-guide { position:absolute; right:4cqw; top:2cqw; width:44cqw; padding:1.3cqw 1.6cqw; border:1px solid #b99e69; background:#f3e9d6f5; color:#3b2d20; box-shadow:0 .5cqw 2cqw #0003; }
+#stage .activity-guide h2 { font-size:1.8cqw; margin:0 0 1cqw; }
+#stage .activity-guide p { font-size:1.15cqw; line-height:1.8; margin:.7cqw 0; }
+#stage .activity-guide strong { display:block; font-size:1.1cqw; line-height:1.7; }
+#stage .received-card { position:absolute; left:4cqw; top:7cqw; padding:1.5cqw 2cqw; background:#f3e9d6ee; border:1px solid #b99e69; color:#3b2d20; animation:card-unfold .65s ease both; }
+#stage .received-card h2 { font-size:2.3cqw; margin:.8cqw 0 1.3cqw; }
+#stage .received-card .eyebrow { color:#725536; }
+#stage .card-close,#stage .card-reopen { position:absolute; left:4cqw; bottom:11cqw; z-index:7; background:#17251ee8; }
+@container (max-width:1000px) {
+  #stage .activity-guide p,#stage .activity-guide strong { font-size:12px; }
+  #stage .activity-guide h2 { font-size:17px; }
+}
+
+/* 第一幕对白直接复用visual-unification.css的原版通用布局，与入殿寻宝一致。 */
+
+/* 近景规则页将指南放在左侧，保留小美面部与手中卡片。 */
+#stage[data-background="card01"] .activity-guide,
+#stage[data-background="guide01"] .activity-guide { left:4cqw; right:auto; width:36cqw; }

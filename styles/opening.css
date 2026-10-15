@@ -1,0 +1,18 @@
+/* 首页文字层级，限定opening-view，避免影响剧情与认知扫描。 */
+#stage .opening-content { width:54cqw; padding:3.4cqw 0 0 6cqw; }
+#stage .opening-kicker { font-size:1.05cqw; line-height:1.5; font-weight:400; letter-spacing:.12em; color:#cfbd98; }
+#stage .opening-title { font-size:6.2cqw; line-height:1.12; letter-spacing:.12em; margin:1.2cqw 0 1.7cqw; color:#fff4de; }
+#stage .opening-subtitle { width:40cqw; font-size:1.4cqw; line-height:1.85; font-weight:400; color:#e8e0d0; text-wrap:balance; }
+#stage .opening-view .persona { margin-top:2.5cqw; padding-left:1.4cqw; border-left:2px solid #b69b68; }
+#stage .opening-view .persona .eyebrow { font-size:.85cqw; line-height:1.5; letter-spacing:.12em; color:#baa579; }
+#stage .opening-view .persona h2 { font-size:2.25cqw; line-height:1.3; margin:.6cqw 0 .65cqw; color:#f5eddd; }
+#stage .opening-view .persona p { max-width:39cqw; font-size:1.1cqw; line-height:1.8; font-weight:400; color:#c9c5b9; text-wrap:balance; }
+#stage .opening-view .start-wrap { margin-top:2.5cqw; gap:1.4cqw; }
+#stage .opening-view .start-wrap .continue { font-size:1.3cqw; padding:.8cqw 1.25cqw; }
+#stage .opening-view .duration { font-size:.8cqw; color:#b4ac9c; letter-spacing:.03em; }
+@container (max-width:1000px) {
+  #stage .opening-subtitle { width:44cqw; font-size:max(14px,1.4cqw); line-height:1.75; }
+  #stage .opening-view .persona p { font-size:max(12px,1.1cqw); max-width:44cqw; }
+  #stage .opening-kicker { font-size:max(11px,1.05cqw); }
+  #stage .opening-view .persona .eyebrow { font-size:max(10px,.85cqw); }
+}

@@ -17,7 +17,7 @@ window.createChapter04 = env => {
   }
   function render(html,cls='chapter04-view'){sync();env.render(html,cls);card.bindImages(view);decorateCard();guard();}
   function scene(text='',label='继续',action='chapter04-next',speaker='小美'){
-    return {chapterLabel:'第四幕 / 核验完成',location:({submit:'来到核验点',verification:'工作人员核验编号',feedback:'工作人员说明结果',regret:'小美表达遗憾',remedy:'工作人员提供补救建议',closing:'小美回应'})[state.split('-')[0]]||'来到核验点',speaker,text,buttonLabel:label,buttonAction:action};
+    return {chapterLabel:'第三幕 / 提交核验',location:({approach:'发现任务核对点',submit:'来到核验点',verification:'工作人员核验编号',feedback:'工作人员说明结果',remedy:'工作人员提供补救建议',closing:'小美回应'})[state.split('-')[0]]||'来到核验点',speaker,text,buttonLabel:label,buttonAction:action};
   }
   function mask(){return ['submit','verification'].includes(shot)?`<div class="photo-card-sign ${shot}-card-sign" aria-hidden="true">待核验</div>`:'';}
   function cameraControl(){return '';}
@@ -31,10 +31,10 @@ window.createChapter04 = env => {
       render(`<div class="ending-content"><h1>等待完整的寻宝记录</h1><p>请先完成第三幕的八处编号记录，再进入核验。</p>${primary('返回序幕','chapter04-restart')}</div>`);return;
     }
     records=Object.freeze(Object.fromEntries(gods.gods.map(g=>[g.id,source[g.id]])));recordsComplete=true;
-    stage.dataset.chapter='4';env.setProgress(3,3);shot='submit';line=0;state='submit-observe';env.background('submit04');
+    stage.dataset.chapter='4';env.setProgress(3,3);shot='approach';line=0;state='approach-observe';env.background('approach04');
     stage.dataset.camera04='submit';stage.dataset.camera04Phase='environment';
     render(ui.heading(scene())+mask()+cameraControl(),'chapter04-view submit04-view');
-    later(()=>{animateCamera('submit');dialogue('submit',0);},data.timing.environment);
+    later(()=>{animateCamera('submit');dialogue('approach',0);},data.timing.environment);
   }
   function dialogue(group,index){
     line=index;state=`${group}-dialogue`;
@@ -66,12 +66,12 @@ window.createChapter04 = env => {
   }
   function verificationUI(){
     cancel();state='verification-ready';
-    render(workspace(`<span class="eyebrow">第四幕 · 核验完成</span><h1>核对八处编号</h1><h2>8/8 已记录，等待工作人员确认。</h2><p>小美已经完成八处人物匹配，现在需要核对记录是否正确。</p>${primary('开始核验','verification-start')}`),'chapter04-view verification-card-view');
+    render(workspace(`<span class="eyebrow">第三幕 · 提交核验</span><h1>核对八处编号</h1><h2>8/8 已记录，等待工作人员确认。</h2><p>小美已经完成八处人物匹配，现在需要核对记录是否正确。</p>${primary('开始核验','verification-start')}`),'chapter04-view verification-card-view');
   }
   function beginVerification(){
     if(state!=='verification-ready')return;clearTimers();state='verifying';checkingId=gods.gods[0].id;sync();decorateCard();
     view.querySelector('[data-action="chapter04-card-zoom"]').disabled=true;
-    view.querySelector('#verification-context').innerHTML='<span class="eyebrow">第四幕 · 工作人员核验</span><h1>逐项核对编号</h1><strong class="verification-counter" id="verification-count">0 / 8</strong><p id="verification-status" role="status">正在核对第一处记录。</p><button class="text-button" data-action="verification-fast">快速完成核验 →</button>';
+    view.querySelector('#verification-context').innerHTML='<span class="eyebrow">第三幕 · 工作人员核验</span><h1>逐项核对编号</h1><strong class="verification-counter" id="verification-count">0 / 8</strong><p id="verification-status" role="status">正在核对第一处记录。</p><button class="text-button" data-action="verification-fast">快速完成核验 →</button>';
     gods.gods.forEach((god,index)=>later(()=>markVerified(index),data.timing.check*(index+1)));
   }
   function markVerified(index){
@@ -86,7 +86,7 @@ window.createChapter04 = env => {
     if(state!=='verification-hold')return;clearTimers();verificationComplete=true;verificationPassed=correctCount()===8;stamped=activityComplete=false;state='verification-result';sync();
     view.querySelector('.card-footnote').textContent='八处记录已核对，本次暂未通过核验，未盖章。';
     view.querySelector('#verification-context').innerHTML=`<span class="eyebrow">核验结果</span><strong class="verification-counter">${correctCount()} / 8 <span>匹配正确</span></strong><h2 class="verification-error-title">发现${8-correctCount()}处匹配错误</h2><p>8处编号已记录</p><p>${correctCount()}处匹配正确</p><p>${8-correctCount()}处匹配错误</p><p>本次暂未通过核验</p><p class="verification-task-state">暂未通过 · 不能盖章</p>${primary('查看核验反馈','verification-feedback')}`;
-    view.querySelector('[data-action="chapter04-card-zoom"]').disabled=false;guard();
+    view.querySelector('[data-action="chapter04-card-zoom"]').disabled=false;env.checkpoint?.();guard();
   }
   function beginScan(){
     if(!verificationComplete||!feedbackShown||!remedyShown||state!=='closing-dialogue')return;
@@ -96,12 +96,12 @@ window.createChapter04 = env => {
   function returnFromScan(){cancel();scanComplete=true;shot='feedback';env.background('feedback04');walkthroughEnd();}
   function walkthroughEnd(){
     cancel();state='walkthrough-end';walkthroughEnded=false;env.setProgress(4,4);
-    render(`<section class="ending-content walkthrough-final"><span class="eyebrow">评估者视角</span><h1>本轮认知走查结束</h1><p>四个任务节点已完成评估，认知问题已记录。</p><div class="walkthrough-final-actions">${primary('结束走查','chapter04-end')}${primary('再次走查','chapter04-restart')}</div></section>`,'chapter04-view final-end-view');
+    render(`<section class="ending-content walkthrough-final"><span class="eyebrow">评估者视角</span><h1>本轮认知走查结束</h1><p>三个剧情节点已完成演示，认知问题已记录。</p><div class="walkthrough-final-actions">${primary('结束走查','chapter04-end')}${primary('再次走查','chapter04-restart')}</div></section>`,'chapter04-view final-end-view');
   }
   function finishWalkthrough(){
     if(state!=='walkthrough-end'||walkthroughEnded)return;
     cancel();walkthroughEnded=true;sync();
-    view.querySelector('[data-action="chapter04-end"]').disabled=true;
+    view.querySelector('[data-action="chapter04-end"]').disabled=true;env.checkpoint?.();
   }
   function zoom(){
     if(view.querySelector('dialog')||['verifying','verification-hold'].includes(state))return;
@@ -110,9 +110,9 @@ window.createChapter04 = env => {
     const close=()=>{dialog.close();dialog.remove();zoomReturn?.focus();};dialog.querySelector('.zoom-close').addEventListener('click',close);dialog.addEventListener('cancel',event=>{event.preventDefault();close();});dialog.showModal();
   }
   function next(){
-    if(state==='submit-dialogue'){if(line<data.dialogues.submit.length-1)dialogue('submit',line+1);else env.crossfadeScene(()=>enterShot('verification'));}
-    else if(state==='feedback-dialogue'){if(line<data.dialogues.feedback.length-1)dialogue('feedback',line+1);else dialogue('regret',0);}
-    else if(state==='regret-dialogue'){if(line<data.dialogues.regret.length-1)dialogue('regret',line+1);else dialogue('remedy',0);}
+    if(state==='approach-dialogue'){env.crossfadeScene(()=>{cancel();shot='submit';env.background('submit04');animateCamera('submit');dialogue('submit',0);});}
+    else if(state==='submit-dialogue'){if(line<data.dialogues.submit.length-1)dialogue('submit',line+1);else env.crossfadeScene(()=>enterShot('verification'));}
+    else if(state==='feedback-dialogue'){if(line<data.dialogues.feedback.length-1)dialogue('feedback',line+1);else dialogue('remedy',0);}
     else if(state==='remedy-dialogue'){if(line<data.dialogues.remedy.length-1)dialogue('remedy',line+1);else{remedyShown=true;dialogue('closing',0);}}
   }
   function handle(action){
@@ -135,5 +135,12 @@ window.createChapter04 = env => {
     const button=view.querySelector('.chapter04-primary:not(:disabled)')||view.querySelector('.dialogue .continue:not(:disabled)')||view.querySelector('[data-action="verification-fast"]');if(button)handle(button.dataset.action);
   }
   function clickScene(){if(state.endsWith('-observe'))stabilizeCamera();}
-  return {start,cancel,reset,handle,advance,clickScene};
+  const snapshot=()=>({state,shot,line,records:{...records},verified:[...verified],checkingId,verificationComplete,feedbackShown,scanComplete,remedyShown,walkthroughEnded,recordsComplete,verificationPassed,stamped,activityComplete});
+  function restoreState(saved){
+    cancel();({state,shot,line,checkingId,verificationComplete,feedbackShown,scanComplete,remedyShown,walkthroughEnded,recordsComplete,verificationPassed,stamped,activityComplete}=saved);
+    records=Object.freeze({...saved.records});verified=new Map(saved.verified);lockedUntil=0;
+  }
+  function resume(){if(['approach-observe','submit-observe'].includes(state)){stage.dataset.camera04Phase='stable';dialogue(shot,0);}}
+  function debugJump(kind){start(undefined,{preview:true});if(kind==='verification'){shot='verification';env.background('verification04');verificationUI();}}
+  return {start,cancel,reset,handle,advance,clickScene,snapshot,restoreState,resume,debugJump};
 };
