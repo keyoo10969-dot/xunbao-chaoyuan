@@ -14,7 +14,7 @@ window.Chapter04Data = {
   dialogues: {
     approach: [{ speaker:'旁白', text:'小美走出三清殿，看到不远处的任务核对点。' }],
     submit: [
-      { speaker:'旁白', text:'带着填满编号的寻宝卡，小美来到了三清殿后侧的任务完成处。' },
+      { speaker:'旁白', text:'小美来到核对点，请工作人员帮她核对' },
       { speaker:'小美', text:'“你好，我把八位主神都找了一遍，可以帮我核对一下吗？”' },
       { speaker:'工作人员', text:'“当然可以，我帮你看看！”' }
     ],
