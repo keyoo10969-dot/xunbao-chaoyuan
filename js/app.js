@@ -128,7 +128,7 @@
     if (mode !== 'first-card') return;
     if (!cardReviewed) { handoff(); return; }
     mode = 'card-stowed'; background('card01');
-    render(ui.dialogue({chapterLabel:'第一幕 / 参加活动',location:'准备出发',speaker:'小美',text:content.firstCardDialogues[2].text,buttonLabel:'继续',buttonAction:'scan'}) + '<button class="text-button card-reopen" data-action="first-card-open">查看寻宝卡 ↗</button>', 'story-view self-service-view');
+    render(ui.dialogue({chapterLabel:'第一幕 / 参加活动',location:'准备出发',speaker:'小美',text:'“明白啦，那就去三清殿找找看！”',buttonLabel:'继续',buttonAction:'scan'}) + '<button class="text-button card-reopen" data-action="first-card-open">查看寻宝卡 ↗</button>', 'story-view self-service-view');
   }
   function showFirstCard(index = 0) {
     if (!cardReceived) return;

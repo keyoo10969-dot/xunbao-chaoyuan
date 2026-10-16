@@ -27,9 +27,7 @@ window.WalkthroughContent = {
     {background:'guide01',location:'自助领取寻宝卡',speaker:'小美',text:'“好，先领一张！”',guide:true,buttonLabel:'领取寻宝卡',buttonAction:'claim-card'}
   ],
   firstCardDialogues: [
-    {speaker:'小美',text:'“原来要找的是这八位人物呀！”'},
-    {speaker:'小美',text:'“到时候在壁画里找到他们，把现场对应的编号贴在人物旁边就行了。”'},
-    {speaker:'小美',text:'“明白啦，那就去三清殿找找看！”'}
+    {speaker:'小美',text:'“原来要找的是这八位人物呀！”'}
   ],
   scan01: {
     number: '01', node: '参加活动',
