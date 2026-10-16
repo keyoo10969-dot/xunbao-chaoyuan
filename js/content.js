@@ -21,7 +21,8 @@ window.WalkthroughContent = {
     {background:'approach01',location:'发现寻宝活动',speaker:'小美',text:'“咦？寻宝朝元？这里还有寻宝活动呀。”',discovery:true},
     {background:'approach01',location:'走近自助领取处',speaker:'小美',text:'“过去看看！”'},
     {background:'guide01',location:'查看活动规则',speaker:'小美',text:'“原来是自助参加的，我看看怎么玩……”',guide:true},
-    {background:'guide01',location:'查看活动规则',speaker:'小美',text:'“哦，要去三清殿找八位人物，把对应编号贴在卡上，再去核对。”',guide:true},
+    {background:'guide01',location:'查看活动规则',speaker:'小美',text:'“领取寻宝卡，前往三清殿，在壁画里找到卡上的八位人物，把他们面前的编号贴在卡上对应人物旁边”',guide:true},
+    {background:'guide01',location:'查看活动规则',speaker:'小美',text:'“贴满八处去核对，全对就能盖章。”',guide:true},
     {background:'guide01',location:'决定参加活动',speaker:'小美',text:'“听起来挺有意思的！”',guide:true},
     {background:'guide01',location:'自助领取寻宝卡',speaker:'小美',text:'“好，先领一张！”',guide:true,buttonLabel:'领取寻宝卡',buttonAction:'claim-card'}
   ],
